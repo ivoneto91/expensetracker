@@ -10,6 +10,7 @@ print(correct_format_date)
 #maybe i can create dicts with key generated from a counter.
 class Tracker: #where we will store the data (dataclasses module?)
     def __init__(self):
+        self.code = []
         self.name = []
         self.date = []
         self.value = []
@@ -17,13 +18,27 @@ class Tracker: #where we will store the data (dataclasses module?)
         self.category = []
 
 
+initial = Tracker() #this variable will store data.
+
 class Expense: #where we will create the data
+    counter = 1
+    
     def __init__(self,name,date,value,installments,category):
+        self.code = Expense.counter
         self.name = str(name) 
         self.date = date
         self.value = float(value) 
         self.installments = int(installments)
         self.category = category
+        print(f"Expense created successfully with code {self.code}.")
+        Expense.counter += 1
+        initial.code.append(int(self.code))
+        initial.name.append(str(self.name))
+        initial.date.append(self.date)
+        initial.value.append(float(self.value))
+        initial.installments.append(int(self.installments))
+        initial.category.append(self.category)
+        
 
 
 #This is the main menu
@@ -135,7 +150,15 @@ else:
                             if rep1.lower() in ("y", "yes"):
                                 rep = True
                             elif rep1.lower() in ("n", "no"):
-                                rep = False
+                                print("Press 1 if you want to return to Main Meno or 2 for exit the program.")
+                                exitquest = int(input())
+                                if exitquest == 1:
+                                    startingmenu()
+                                    menuans = input()
+                                else:
+                                    break
+                                
+                                
             elif categoryans == 2: #creating food expense
                 os.system("cls")
                 print("Adding a new Food expense.")
