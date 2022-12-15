@@ -2,7 +2,6 @@ import os # os.system("cls")
 from datetime import date
 from dateutil import parser
 
-
 today_date = date.today()
 date_format = "%d/%m/%y"
 correct_format_date = today_date.strftime(date_format)
@@ -11,11 +10,12 @@ print(correct_format_date)
 #maybe i can create dicts with key generated from a counter.
 class Tracker: #where we will store the data (dataclasses module?)
     def __init__(self):
-        self.name = {}
+        self.name = []
         self.date = []
         self.value = []
         self.installments = []
         self.category = []
+
 
 class Expense: #where we will create the data
     def __init__(self,name,date,value,installments,category):
@@ -24,6 +24,7 @@ class Expense: #where we will create the data
         self.value = float(value) 
         self.installments = int(installments)
         self.category = category
+
 
 #This is the main menu
 def startingmenu():
@@ -39,7 +40,7 @@ def categoryexpenses():
     print("Select 2 for Food expenses.")
     print("Select 3 for Transport expenses.")
     print("Select 4 for Leisure expenses.")
-    print("Select 5 for Health expenses.")
+    print("Select 5 for Healthcare expenses.")
     print("Select 6 for Miscellaneous expenses.")
 
 startingmenu()
@@ -57,55 +58,84 @@ else:
             categoryans = int(input())
         else:
             if categoryans == 1: #creating household expense
-                os.system("cls")
-                print("Adding a new Household expense.")
-                date = input("Did you made this expense today?(Y/N): ")
-                while date.lower() not in ("y", "yes", "n", "no"):
-                    print("Wrong Input. Select Y or N.")
+                rep = True
+                while rep is True: # this while enable create another expense after the first one.
+                    os.system("cls")
+                    print("Adding a new Household expense.")
                     date = input("Did you made this expense today?(Y/N): ")
-                else:
-                    if date.lower() in ("y", "yes"):
-                        #we will import date from module.
-                        tempname = input("What was your expense? ")
-                        tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                    while date.lower() not in ("y", "yes", "n", "no"):
+                        print("Wrong Input. Select Y or N.")
+                        date = input("Did you made this expense today?(Y/N): ")
+                    else:
+                        if date.lower() in ("y", "yes"):
+                            #we will import date from module.
+                            tempname = input("What was your expense? ")
+                            tempvalue = input("What was the value? $")
+                            while True:
+                                try:
+                                    float(tempvalue)
+                                except ValueError: 
+                                    print("You didnt insert a value.(xx.xx)")
+                                    tempvalue = input("What was the value? $:")
+                                else:
+                                    break
 
-                        tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                            tempinstallments = input("How many installments? ")
+                            while True:
+                                try:
+                                    float(tempinstallments)
+                                except:                         
+                                    print("You didnt insert a number.")
+                                    tempinstallments = input("How many installments? ")
+                                else:
+                                    break
 
-                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Household")
-                    elif date.lower() in ("n", "no"):
-                        tempname = input("What was your expense? ")
-                        tempdate = input("When you made this expense? (DD/MM/YY) ")
-                        try: #looping only one time.
-                           bool(parser.parse(tempdate))
-                        except ValueError:
-                            print("Incorrect data format. Insert DD/MM/YY")
+                            temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Household")
+                            print("Do you wanna create another expense? (Y/N)")
+                            rep1 = input()
+                            if rep1.lower() in ("y", "yes"):
+                                rep = True
+                            elif rep1.lower() in ("n", "no"):
+                                rep = False
+                        elif date.lower() in ("n", "no"):
+                            tempname = input("What was your expense? ")
                             tempdate = input("When you made this expense? (DD/MM/YY) ")
+                            while True:
+                                try:
+                                    bool(parser.parse(tempdate))
+                                except ValueError:
+                                    print("Incorrect data format. Insert DD/MM/YY")
+                                    tempdate = input("When you made this expense? (DD/MM/YY) ")
+                                else:
+                                    break
 
-                        tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                            tempvalue = input("What was the value? $")
+                            while True:
+                                try:
+                                    float(tempvalue)
+                                except ValueError: 
+                                    print("You didnt insert a value.(xx.xx)")
+                                    tempvalue = input("What was the value? $:")
+                                else:
+                                    break
 
-                        tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                            tempinstallments = input("How many installments? ")
+                            while True:
+                                try:
+                                    float(tempinstallments)
+                                except:                         
+                                    print("You didnt insert a number.")
+                                    tempinstallments = input("How many installments? ")
+                                else:
+                                    break 
 
-                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Household")
+                            temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Household")
+                            print("Do you wanna create another expense? (Y/N)")
+                            rep1 = input()
+                            if rep1.lower() in ("y", "yes"):
+                                rep = True
+                            elif rep1.lower() in ("n", "no"):
+                                rep = False
             elif categoryans == 2: #creating food expense
                 os.system("cls")
                 print("Adding a new Food expense.")
@@ -118,42 +148,57 @@ else:
                         #we will import date from module.
                         tempname = input("What was your expense? ")
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break
 
                         temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Food")
                     elif date.lower() in ("n", "no"):
                         tempname = input("What was your expense? ")
                         tempdate = input("When you made this expense? (DD/MM/YY) ")
-                        try: #looping only one time.
-                           bool(parser.parse(tempdate))
-                        except ValueError:
-                            print("Incorrect data format. Insert DD/MM/YY")
-                            tempdate = input("When you made this expense? (DD/MM/YY) ")
+                        while True:
+                            try:
+                                bool(parser.parse(tempdate))
+                            except ValueError:
+                                print("Incorrect data format. Insert DD/MM/YY")
+                                tempdate = input("When you made this expense? (DD/MM/YY) ")
+                            else:
+                                break
 
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break 
 
                         temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Food")
             elif categoryans == 3: #creating transport expense
@@ -168,42 +213,57 @@ else:
                         #we will import date from module.
                         tempname = input("What was your expense? ")
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break
 
                         temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Transport")
                     elif date.lower() in ("n", "no"):
                         tempname = input("What was your expense? ")
                         tempdate = input("When you made this expense? (DD/MM/YY) ")
-                        try: #looping only one time.
-                           bool(parser.parse(tempdate))
-                        except ValueError:
-                            print("Incorrect data format. Insert DD/MM/YY")
-                            tempdate = input("When you made this expense? (DD/MM/YY) ")
+                        while True:
+                            try:
+                                bool(parser.parse(tempdate))
+                            except ValueError:
+                                print("Incorrect data format. Insert DD/MM/YY")
+                                tempdate = input("When you made this expense? (DD/MM/YY) ")
+                            else:
+                                break
 
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break 
 
                         temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Transport")
             elif categoryans == 4: #creating leisure expense
@@ -218,47 +278,62 @@ else:
                         #we will import date from module.
                         tempname = input("What was your expense? ")
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break
 
                         temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Leisure")
                     elif date.lower() in ("n", "no"):
                         tempname = input("What was your expense? ")
                         tempdate = input("When you made this expense? (DD/MM/YY) ")
-                        try: #looping only one time.
-                           bool(parser.parse(tempdate))
-                        except ValueError:
-                            print("Incorrect data format. Insert DD/MM/YY")
-                            tempdate = input("When you made this expense? (DD/MM/YY) ")
+                        while True:
+                            try:
+                                bool(parser.parse(tempdate))
+                            except ValueError:
+                                print("Incorrect data format. Insert DD/MM/YY")
+                                tempdate = input("When you made this expense? (DD/MM/YY) ")
+                            else:
+                                break
 
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break 
 
                         temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Leisure")
             elif categoryans == 5: #creating health expense
                 os.system("cls")
-                print("Adding a new Health expense.")
+                print("Adding a new Healthcare expense.")
                 date = input("Did you made this expense today?(Y/N): ")
                 while date.lower() not in ("y", "yes", "n", "no"):
                     print("Wrong Input. Select Y or N.")
@@ -268,44 +343,59 @@ else:
                         #we will import date from module.
                         tempname = input("What was your expense? ")
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break
 
-                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Health")
+                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Healthcare")
                     elif date.lower() in ("n", "no"):
                         tempname = input("What was your expense? ")
                         tempdate = input("When you made this expense? (DD/MM/YY) ")
-                        try: #looping only one time.
-                           bool(parser.parse(tempdate))
-                        except ValueError:
-                            print("Incorrect data format. Insert DD/MM/YY")
-                            tempdate = input("When you made this expense? (DD/MM/YY) ")
+                        while True:
+                            try:
+                                bool(parser.parse(tempdate))
+                            except ValueError:
+                                print("Incorrect data format. Insert DD/MM/YY")
+                                tempdate = input("When you made this expense? (DD/MM/YY) ")
+                            else:
+                                break
 
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break 
 
-                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Health")
+                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Healthcare")
             elif categoryans == 6: #creating misc expense
                 os.system("cls")
                 print("Adding a new Miscellaneous expense.")
@@ -318,42 +408,57 @@ else:
                         #we will import date from module.
                         tempname = input("What was your expense? ")
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break
 
                         temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Miscellaneous")
                     elif date.lower() in ("n", "no"):
                         tempname = input("What was your expense? ")
                         tempdate = input("When you made this expense? (DD/MM/YY) ")
-                        try: #looping only one time.
-                           bool(parser.parse(tempdate))
-                        except ValueError:
-                            print("Incorrect data format. Insert DD/MM/YY")
-                            tempdate = input("When you made this expense? (DD/MM/YY) ")
+                        while True:
+                            try:
+                                bool(parser.parse(tempdate))
+                            except ValueError:
+                                print("Incorrect data format. Insert DD/MM/YY")
+                                tempdate = input("When you made this expense? (DD/MM/YY) ")
+                            else:
+                                break
 
                         tempvalue = input("What was the value? $")
-                        try:
-                            float(tempvalue)
-                        except ValueError: #looping only one time.
-                            print("You didnt insert a value.(xx.xx)")
-                            tempvalue = input("What was the value? $:")
+                        while True:
+                            try:
+                                float(tempvalue)
+                            except ValueError: 
+                                print("You didnt insert a value.(xx.xx)")
+                                tempvalue = input("What was the value? $:")
+                            else:
+                                break
 
                         tempinstallments = input("How many installments? ")
-                        try:
-                            float(tempinstallments)
-                        except:                          #looping only one time.
-                            print("You didnt insert a number.")
-                            tempinstallments = input("How many installments? ") 
+                        while True:
+                            try:
+                                float(tempinstallments)
+                            except:                         
+                                print("You didnt insert a number.")
+                                tempinstallments = input("How many installments? ")
+                            else:
+                                break
 
                         temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Miscellaneous")
     elif menuans == 2:
@@ -362,7 +467,6 @@ else:
     elif menuans == 3:
         print("Thanks for using. See you next time : )")
         exit()
-
 
 
 
