@@ -43,6 +43,7 @@ class Expense: #where we will create the data
 
 #This is the main menu
 def startingmenu():
+    os.system("cls")
     print("    Expense Tracker Menu    \n") 
     print("Press 1 for Add an expense")
     print("Press 2 for Visualize expenses")
@@ -149,9 +150,10 @@ else:
                             rep1 = input()
                             if rep1.lower() in ("y", "yes"):
                                 rep = True
-                            elif rep1.lower() in ("n", "no"):
-                                print("Press 1 if you want to return to Main Meno or 2 for exit the program.")
+                            elif rep1.lower() in ("n", "no"): #kindaworking.
+                                print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
                                 exitquest = int(input())
+                                rep = False
                                 if exitquest == 1:
                                     startingmenu()
                                     menuans = input()
