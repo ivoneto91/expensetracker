@@ -15,7 +15,7 @@ def initsql(): #lets see...
         code INTEGER,
         name TEXT,
         date DATE,
-        value INTEGER,
+        value REAL,
         installments INTEGER,
         category TEXT
         )
@@ -26,12 +26,18 @@ def initsql(): #lets see...
 class Expense: 
     counter = 1
     
-    def __init__(self,name,date,value,installments,category):
-        self.code = Expense.counter
+    def __init__(self, name, date, value, installments, category):
+        conn = db.connect("expenses.db")    
+        cur = conn.cursor()
+        cur.execute("SELECT max(code) from expenses")
+        result = cur.fetchone()
+        if result[0] is not None:
+            self.counter = result[0] + 1
+        self.code = self.counter
         self.name = str(name) 
         self.date = date
-        self.value = value
-        self.installments = installments
+        self.value = float(value)
+        self.installments = int(installments)
         self.category = category
         self.conn = db.connect('expenses.db')
         self.cursor = self.conn.cursor()
@@ -39,7 +45,7 @@ class Expense:
         self.cursor.execute(sql1)
         self.conn.commit()
         print(f"Expense created successfully with code {self.code}.")
-        Expense.counter += 1
+        self.counter += 1
 
 tempname = ""
 tempvalue = 0
@@ -47,37 +53,40 @@ tempinstallments = 0
 tempdate = ""
 
 def menuvalue(): #use this function when need input value
+    global tempvalue
     tempvalue = input("What was the value? $")
     while True:
         try:
             float(tempvalue)
         except ValueError: 
             print("You didnt insert a value.(xx.xx)")
-            tempvalue = input("What was the value? $:")
+            menuvalue()
         else:
-            break
+            return tempvalue
 
 def menuinstallments(): #input installments
+    global tempinstallments
     tempinstallments = input("How many installments? ")
     while True:
         try:
-            float(tempinstallments)
+            int(tempinstallments)
         except:                         
             print("You didnt insert a number.")
-            tempinstallments = input("How many installments? ")
+            menuinstallments()
         else:
-            break
+            return tempinstallments
 
 def menudate(): #input date
+    global tempdate
     tempdate = input("When you made this expense? (DD/MM/YY) ")
     while True:
         try:
             bool(parser.parse(tempdate))
         except ValueError:
             print("Incorrect data format. Insert DD/MM/YY")
-            tempdate = input("When you made this expense? (DD/MM/YY) ")
+            menudate()
         else:
-            break
+            return tempdate
 
 #This is the main menu
 def startingmenu():
@@ -390,6 +399,5 @@ def mainmenu():
 
 initsql()
 mainmenu()
-
 
                                                         
