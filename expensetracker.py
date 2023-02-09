@@ -47,6 +47,7 @@ class Expense:
         print(f"Expense created successfully with code {self.code}.")
         self.counter += 1
 
+temp = ""
 tempname = ""
 tempvalue = 0
 tempinstallments = 0
@@ -106,6 +107,311 @@ def categoryexpenses():
     print("Select 5 for Healthcare expenses.")
     print("Select 6 for Miscellaneous expenses.")
 
+def creationmenu():
+    global temp
+    os.system("cls")
+    categoryexpenses()
+    categoryans = int(input())
+    while categoryans not in (1, 2, 3, 4, 5, 6):
+        print("Invalid Option. Press 1, 2, 3, 4, 5 or 6 to create a new expense.")
+        categoryans = int(input())
+    else:
+        if categoryans == 1: #creating household expense
+            rep = True
+            while rep is True: #this while enable create another expense after the first one.
+                os.system("cls")
+                print("Adding a new Household expense.")
+                date = input("Did you made this expense today?(Y/N): ")
+                while date.lower() not in ("y", "yes", "n", "no"):
+                    print("Wrong Input. Select Y or N.")
+                    date = input("Did you made this expense today?(Y/N): ")
+                else:
+                    if date.lower() in ("y", "yes"): #in this case we will import date from module.
+                        tempname = input("What was your expense? ")
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Household")
+                        print("Do you wanna create another Household expense? (Y/N)")
+                        rep1 = input()
+                        if rep1.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep1.lower() in ("n", "no"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+                    elif date.lower() in ("n", "no"):
+                        tempname = input("What was your expense? ")
+                        menudate()
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Household")
+                        print("Do you wanna create another Household expense? (Y/N)")
+                        rep2 = input()
+                        if rep2.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep2.lower not in ("y", "yes"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+        if categoryans == 2: #creating food expense
+            rep = True
+            while rep is True: #this while enable create another expense after the first one.
+                os.system("cls")
+                print("Adding a new Food expense.")
+                date = input("Did you made this expense today?(Y/N): ")
+                while date.lower() not in ("y", "yes", "n", "no"):
+                    print("Wrong Input. Select Y or N.")
+                    date = input("Did you made this expense today?(Y/N): ")
+                else:
+                    if date.lower() in ("y", "yes"): #in this case we will import date from module.
+                        tempname = input("What was your expense? ")
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Food")
+                        print("Do you wanna create another Food expense? (Y/N)")
+                        rep1 = input()
+                        if rep1.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep1.lower() in ("n", "no"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+                    elif date.lower() in ("n", "no"):
+                        tempname = input("What was your expense? ")
+                        menudate()
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Food")
+                        print("Do you wanna create another Food expense? (Y/N)")
+                        rep2 = input()
+                        if rep2.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep2.lower not in ("y", "yes"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+        if categoryans == 3: #creating transport expense
+            rep = True
+            while rep is True: #this while enable create another expense after the first one.
+                os.system("cls")
+                print("Adding a new Transport expense.")
+                date = input("Did you made this expense today?(Y/N): ")
+                while date.lower() not in ("y", "yes", "n", "no"):
+                    print("Wrong Input. Select Y or N.")
+                    date = input("Did you made this expense today?(Y/N): ")
+                else:
+                    if date.lower() in ("y", "yes"): #in this case we will import date from module.
+                        tempname = input("What was your expense? ")
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Transport")
+                        print("Do you wanna create another Transport expense? (Y/N)")
+                        rep1 = input()
+                        if rep1.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep1.lower() in ("n", "no"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+                    elif date.lower() in ("n", "no"):
+                        tempname = input("What was your expense? ")
+                        menudate()
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Transport")
+                        print("Do you wanna create another Transport expense? (Y/N)")
+                        rep2 = input()
+                        if rep2.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep2.lower not in ("y", "yes"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+        if categoryans == 4: #creating leisure expense
+            rep = True
+            while rep is True: #this while enable create another expense after the first one.
+                os.system("cls")
+                print("Adding a new Leisure expense.")
+                date = input("Did you made this expense today?(Y/N): ")
+                while date.lower() not in ("y", "yes", "n", "no"):
+                    print("Wrong Input. Select Y or N.")
+                    date = input("Did you made this expense today?(Y/N): ")
+                else:
+                    if date.lower() in ("y", "yes"): #in this case we will import date from module.
+                        tempname = input("What was your expense? ")
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Leisure")
+                        print("Do you wanna create another Leisure expense? (Y/N)")
+                        rep1 = input()
+                        if rep1.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep1.lower() in ("n", "no"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+                    elif date.lower() in ("n", "no"):
+                        tempname = input("What was your expense? ")
+                        menudate()
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Leisure")
+                        print("Do you wanna create another Leisure expense? (Y/N)")
+                        rep2 = input()
+                        if rep2.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep2.lower not in ("y", "yes"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+        if categoryans == 5: #creating Healthcare expense
+            rep = True
+            while rep is True: #this while enable create another expense after the first one.
+                os.system("cls")
+                print("Adding a new Healthcare expense.")
+                date = input("Did you made this expense today?(Y/N): ")
+                while date.lower() not in ("y", "yes", "n", "no"):
+                    print("Wrong Input. Select Y or N.")
+                    date = input("Did you made this expense today?(Y/N): ")
+                else:
+                    if date.lower() in ("y", "yes"): #in this case we will import date from module.
+                        tempname = input("What was your expense? ")
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Healthcare")
+                        print("Do you wanna create another Healthcare expense? (Y/N)")
+                        rep1 = input()
+                        if rep1.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep1.lower() in ("n", "no"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+                    elif date.lower() in ("n", "no"):
+                        tempname = input("What was your expense? ")
+                        menudate()
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Healthcare")
+                        print("Do you wanna create another Healthcare expense? (Y/N)")
+                        rep2 = input()
+                        if rep2.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep2.lower not in ("y", "yes"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+        if categoryans == 6: #creating Miscellaneous expense
+            rep = True
+            while rep is True: #this while enable create another expense after the first one.
+                os.system("cls")
+                print("Adding a new Miscellaneous expense.")
+                date = input("Did you made this expense today?(Y/N): ")
+                while date.lower() not in ("y", "yes", "n", "no"):
+                    print("Wrong Input. Select Y or N.")
+                    date = input("Did you made this expense today?(Y/N): ")
+                else:
+                    if date.lower() in ("y", "yes"): #in this case we will import date from module.
+                        tempname = input("What was your expense? ")
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Miscellaneous")
+                        print("Do you wanna create another Miscellaneous expense? (Y/N)")
+                        rep1 = input()
+                        if rep1.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep1.lower() in ("n", "no"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+                    elif date.lower() in ("n", "no"):
+                        tempname = input("What was your expense? ")
+                        menudate()
+                        menuvalue()
+                        menuinstallments()
+                        temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Miscellaneous")
+                        print("Do you wanna create another Miscellaneous expense? (Y/N)")
+                        rep2 = input()
+                        if rep2.lower() in ("y", "yes"):
+                            rep = True
+                        elif rep2.lower not in ("y", "yes"):
+                            print("Press 1 if you want to return to Main Menu, 2 if you want to create another expense in a different category and 3 for exit the program.")
+                            exitquest = int(input())
+                            rep = False
+                            if exitquest == 1:
+                                mainmenu()
+                            if exitquest ==2:
+                                creationmenu()
+                            else:
+                                exit()
+    
+
 def mainmenu():
     startingmenu()
     menuans = int(input())
@@ -114,283 +420,7 @@ def mainmenu():
         menuans = int(input())
     else:
         if menuans == 1:
-            os.system("cls")
-            categoryexpenses()
-            categoryans = int(input())
-            while categoryans not in (1, 2, 3, 4, 5, 6):
-                print("Invalid Option. Press 1, 2, 3, 4, 5 or 6 to create a new expense.")
-                categoryans = int(input())
-            else:
-                if categoryans == 1: #creating household expense
-                    rep = True
-                    while rep is True: #this while enable create another expense after the first one.
-                        os.system("cls")
-                        print("Adding a new Household expense.")
-                        date = input("Did you made this expense today?(Y/N): ")
-                        while date.lower() not in ("y", "yes", "n", "no"):
-                            print("Wrong Input. Select Y or N.")
-                            date = input("Did you made this expense today?(Y/N): ")
-                        else:
-                            if date.lower() in ("y", "yes"): #in this case we will import date from module.
-                                tempname = input("What was your expense? ")
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Household")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep1 = input()
-                                if rep1.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep1.lower() in ("n", "no"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                            elif date.lower() in ("n", "no"):
-                                tempname = input("What was your expense? ")
-                                menudate()
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Household")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep2 = input()
-                                if rep2.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep2.lower not in ("y", "yes"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                if categoryans == 2: #creating food expense
-                    rep = True
-                    while rep is True: #this while enable create another expense after the first one.
-                        os.system("cls")
-                        print("Adding a new Food expense.")
-                        date = input("Did you made this expense today?(Y/N): ")
-                        while date.lower() not in ("y", "yes", "n", "no"):
-                            print("Wrong Input. Select Y or N.")
-                            date = input("Did you made this expense today?(Y/N): ")
-                        else:
-                            if date.lower() in ("y", "yes"): #in this case we will import date from module.
-                                tempname = input("What was your expense? ")
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Food")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep1 = input()
-                                if rep1.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep1.lower() in ("n", "no"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                            elif date.lower() in ("n", "no"):
-                                tempname = input("What was your expense? ")
-                                menudate()
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Food")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep2 = input()
-                                if rep2.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep2.lower not in ("y", "yes"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                if categoryans == 3: #creating transport expense
-                    rep = True
-                    while rep is True: #this while enable create another expense after the first one.
-                        os.system("cls")
-                        print("Adding a new Transport expense.")
-                        date = input("Did you made this expense today?(Y/N): ")
-                        while date.lower() not in ("y", "yes", "n", "no"):
-                            print("Wrong Input. Select Y or N.")
-                            date = input("Did you made this expense today?(Y/N): ")
-                        else:
-                            if date.lower() in ("y", "yes"): #in this case we will import date from module.
-                                tempname = input("What was your expense? ")
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Transport")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep1 = input()
-                                if rep1.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep1.lower() in ("n", "no"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                            elif date.lower() in ("n", "no"):
-                                tempname = input("What was your expense? ")
-                                menudate()
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Transport")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep2 = input()
-                                if rep2.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep2.lower not in ("y", "yes"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                if categoryans == 4: #creating leisure expense
-                    rep = True
-                    while rep is True: #this while enable create another expense after the first one.
-                        os.system("cls")
-                        print("Adding a new Leisure expense.")
-                        date = input("Did you made this expense today?(Y/N): ")
-                        while date.lower() not in ("y", "yes", "n", "no"):
-                            print("Wrong Input. Select Y or N.")
-                            date = input("Did you made this expense today?(Y/N): ")
-                        else:
-                            if date.lower() in ("y", "yes"): #in this case we will import date from module.
-                                tempname = input("What was your expense? ")
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Leisure")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep1 = input()
-                                if rep1.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep1.lower() in ("n", "no"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                            elif date.lower() in ("n", "no"):
-                                tempname = input("What was your expense? ")
-                                menudate()
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Leisure")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep2 = input()
-                                if rep2.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep2.lower not in ("y", "yes"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                if categoryans == 5: #creating Healthcare expense
-                    rep = True
-                    while rep is True: #this while enable create another expense after the first one.
-                        os.system("cls")
-                        print("Adding a new Healthcare expense.")
-                        date = input("Did you made this expense today?(Y/N): ")
-                        while date.lower() not in ("y", "yes", "n", "no"):
-                            print("Wrong Input. Select Y or N.")
-                            date = input("Did you made this expense today?(Y/N): ")
-                        else:
-                            if date.lower() in ("y", "yes"): #in this case we will import date from module.
-                                tempname = input("What was your expense? ")
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Healthcare")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep1 = input()
-                                if rep1.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep1.lower() in ("n", "no"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                            elif date.lower() in ("n", "no"):
-                                tempname = input("What was your expense? ")
-                                menudate()
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Healthcare")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep2 = input()
-                                if rep2.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep2.lower not in ("y", "yes"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                if categoryans == 6: #creating Miscellaneous expense
-                    rep = True
-                    while rep is True: #this while enable create another expense after the first one.
-                        os.system("cls")
-                        print("Adding a new Miscellaneous expense.")
-                        date = input("Did you made this expense today?(Y/N): ")
-                        while date.lower() not in ("y", "yes", "n", "no"):
-                            print("Wrong Input. Select Y or N.")
-                            date = input("Did you made this expense today?(Y/N): ")
-                        else:
-                            if date.lower() in ("y", "yes"): #in this case we will import date from module.
-                                tempname = input("What was your expense? ")
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, correct_format_date, tempvalue, tempinstallments, "Miscellaneous")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep1 = input()
-                                if rep1.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep1.lower() in ("n", "no"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
-                            elif date.lower() in ("n", "no"):
-                                tempname = input("What was your expense? ")
-                                menudate()
-                                menuvalue()
-                                menuinstallments()
-                                temp = Expense(tempname, tempdate, tempvalue, tempinstallments, "Miscellaneous")
-                                print("Do you wanna create another expense? (Y/N)")
-                                rep2 = input()
-                                if rep2.lower() in ("y", "yes"):
-                                    rep = True
-                                elif rep2.lower not in ("y", "yes"):
-                                    print("Press 1 if you want to return to Main Menu or 2 for exit the program.")
-                                    exitquest = int(input())
-                                    rep = False
-                                    if exitquest == 1:
-                                        mainmenu()
-                                    else:
-                                        break
+            creationmenu()
         elif menuans == 2: #here we will generate reports
             print("ss2")
         elif menuans == 3:
